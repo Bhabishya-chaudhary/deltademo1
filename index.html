@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar — Make your next move</title>
+  <style>
+    :root {
+      --ink: #17241f;
+      --muted: #637169;
+      --paper: #f7f5ef;
+      --green: #c8ed79;
+      --line: #dce2d9;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    header {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 750;
+      letter-spacing: -0.04em;
+    }
+
+    .mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--green);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #506057;
+      font-size: 13px;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .nav-cta {
+      padding: 12px 17px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+    }
+
+    .hero {
+      padding: 100px 0 92px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #637169;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: #84918a;
+    }
+
+    h1 {
+      max-width: 600px;
+      margin: 22px 0 20px;
+      font-size: clamp(54px, 7.5vw, 92px);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+    }
+
+    h1 em {
+      font-family: Georgia, serif;
+      font-weight: 400;
+    }
+
+    .intro {
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 20px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: #30483d;
+    }
+
+    .button span { color: var(--green); font-size: 17px; }
+    .text-link { font-size: 13px; font-weight: 650; }
+
+    .visual {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #dfe9d6;
+    }
+
+    .visual::before {
+      content: "";
+      position: absolute;
+      top: 46px;
+      left: 50%;
+      width: 370px;
+      height: 370px;
+      border-radius: 50%;
+      background: #c7ed79;
+      transform: translateX(-50%);
+    }
+
+    .visual::after {
+      content: "";
+      position: absolute;
+      top: 87px;
+      left: 50%;
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(23, 36, 31, 0.23);
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    .sun {
+      position: absolute;
+      z-index: 2;
+      top: 159px;
+      left: 50%;
+      width: 145px;
+      height: 145px;
+      border-radius: 50%;
+      background: var(--paper);
+      box-shadow: 0 18px 45px rgba(26, 48, 34, 0.13);
+      transform: translateX(-50%);
+    }
+
+    .orbit {
+      position: absolute;
+      z-index: 3;
+      top: 93px;
+      left: calc(50% + 113px);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .caption {
+      position: absolute;
+      z-index: 4;
+      bottom: 20px;
+      left: 22px;
+      color: #43554a;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .stamp {
+      position: absolute;
+      z-index: 4;
+      top: 21px;
+      right: 22px;
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(23, 36, 31, 0.35);
+      border-radius: 50%;
+      font-size: 9px;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(12deg);
+    }
+
+    .proof {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: #65736b;
+      font-size: 12px;
+    }
+
+    .proof strong { color: var(--ink); }
+
+    .proof-logos {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #45534b;
+      font-size: 15px;
+      font-weight: 750;
+      letter-spacing: -0.04em;
+    }
+
+    .section { padding: 88px 0 100px; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    h2 {
+      max-width: 580px;
+      margin: 15px 0 0;
+      font-size: clamp(34px, 4.5vw, 54px);
+      font-weight: 580;
+      line-height: 1.03;
+      letter-spacing: -0.065em;
+    }
+
+    .section-note {
+      max-width: 280px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 207px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      background: white;
+      transform: translateY(-3px);
+    }
+
+    .number { color: #87948c; font-size: 11px; }
+
+    .card h3 {
+      margin: 27px 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .card p {
+      max-width: 260px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .arrow { align-self: flex-end; font-size: 20px; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0;
+      border-top: 1px solid var(--line);
+      color: #718078;
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      header { height: 70px; }
+      nav { gap: 14px; }
+      nav a:not(.nav-cta) { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 34px;
+        padding: 66px 0 56px;
+      }
+
+      h1 { font-size: clamp(54px, 16vw, 82px); }
+
+      .visual { min-height: 340px; }
+      .visual::before { top: 25px; width: 290px; height: 290px; }
+      .visual::after { top: 55px; width: 230px; height: 230px; }
+      .sun { top: 112px; width: 116px; height: 116px; }
+      .orbit { top: 60px; left: calc(50% + 82px); }
+
+      .proof {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .proof-logos { gap: 22px; flex-wrap: wrap; }
+      .section { padding: 65px 0 72px; }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .cards { grid-template-columns: 1fr; gap: 10px; }
+      .card { min-height: 180px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#home" aria-label="Northstar home">
+        <span class="mark">✳</span> northstar
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#approach">Approach</a>
+        <a href="#work">What we do</a>
+        <a class="nav-cta" href="mailto:hello@northstar.studio">Let’s talk ↗</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Independent creative studio</div>
+          <h1>Make your<br>next move <em>matter.</em></h1>
+          <p class="intro">
+            We help ambitious people turn bright ideas into brands and digital
+            experiences built for what comes next.
+          </p>
+          <div class="actions">
+            <a class="button" href="mailto:hello@northstar.studio">
+              Start a conversation <span>↗</span>
+            </a>
+            <a class="text-link" href="#approach">Get to know us ↓</a>
+          </div>
+        </div>
+
+        <div class="visual" role="img" aria-label="Abstract green orbit around a bright center">
+          <div class="stamp">Good ideas<br>go places</div>
+          <div class="sun"></div>
+          <div class="orbit"></div>
+          <div class="caption">A little direction changes everything</div>
+        </div>
+      </section>
+
+      <section class="proof" aria-label="Trusted by">
+        <strong>Good company, always.</strong>
+        <div class="proof-logos">
+          <span>arcadia</span>
+          <span>fieldnotes</span>
+          <span>◎ onward</span>
+          <span>COMMON</span>
+        </div>
+      </section>
+
+      <section class="section" id="approach">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">A clear path forward</div>
+            <h2>Big-picture thinking.<br>Good things, made real.</h2>
+          </div>
+          <p class="section-note">
+            From the first spark to the final detail, we bring strategy and
+            craft together to help your next chapter take shape.
+          </p>
+        </div>
+
+        <div class="cards" id="work">
+          <a class="card" href="mailto:hello@northstar.studio">
+            <span class="number">01 — Find your focus</span>
+            <div>
+              <h3>Brand strategy</h3>
+              <p>Get clear on what makes you different and where you’re headed.</p>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="card" href="mailto:hello@northstar.studio">
+            <span class="number">02 — Make it memorable</span>
+            <div>
+              <h3>Visual identity</h3>
+              <p>Build a distinctive look and feel people recognize and remember.</p>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="card" href="mailto:hello@northstar.studio">
+            <span class="number">03 — Bring it to life</span>
+            <div>
+              <h3>Digital experiences</h3>
+              <p>Create useful, thoughtful places for your audience to connect.</p>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Northstar Studio</span>
+      <span>Made with care, for what’s next.</span>
+    </footer>
+  </div>
+</body>
+</html>
